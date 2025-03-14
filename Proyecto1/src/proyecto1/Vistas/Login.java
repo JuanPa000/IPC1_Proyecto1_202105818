@@ -6,7 +6,11 @@ package proyecto1.Vistas;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import proyecto1.Modelos.Cuenta;
+import proyecto1.Modelos.Usuario;
 
 /**
  *
@@ -202,7 +206,12 @@ public class Login extends javax.swing.JFrame {
     // Método para abrir la ventana principal (aquí solo mostramos un mensaje por ahora)
     private void abrirVentanaPrincipal() {
         this.dispose(); // Cierra la ventana de login
-        PantallaPrincipal ventana = new PantallaPrincipal(); // Crea una instancia de la nueva ventana
+        
+         // Crear listas vacías para usuarios y cuentas (esto dependerá de cómo manejes los datos)
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Cuenta> listaCuentas = new ArrayList<>();
+
+        PantallaPrincipal ventana = new PantallaPrincipal(listaUsuarios, listaCuentas); // Crea una instancia de la nueva ventana
         ventana.setVisible(true); // La hace visible
     }
 

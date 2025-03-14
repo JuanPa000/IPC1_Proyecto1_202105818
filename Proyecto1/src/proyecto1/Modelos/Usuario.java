@@ -79,6 +79,7 @@ public Usuario(int id, String nombre, String apellido, String usuario, String pa
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
 }
     
 
