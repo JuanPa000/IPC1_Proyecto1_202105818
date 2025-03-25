@@ -1,31 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyecto1.Modelos;
 
 /**
- *
- * @author ppabl
+ * Clase Cuenta que representa una cuenta bancaria de un usuario.
  */
 public class Cuenta {
     private String numeroCuenta;
     private double saldo;
-    private String tipoCuenta; //Ahorro o Corriente
-    private Usuario usuario;   //Dueño de la cuenta
-    
-    //Contructor para inicializar los datos
-    public Cuenta(String numeroCuenta, Double saldo, String tipoCuenta, Usuario usuario){
+    private Usuario usuario; // Dueño de la cuenta
+
+    /**
+     * Constructor para inicializar los datos de la cuenta.
+     * @param numeroCuenta Número único de la cuenta.
+     * @param usuario Cliente dueño de la cuenta.
+     */
+    public Cuenta(String numeroCuenta, Usuario usuario) {
         this.numeroCuenta = numeroCuenta;
-        this.saldo = 0; //Saldo Incial 0
-        this.tipoCuenta = tipoCuenta;
+        this.saldo = 0; // Saldo inicial de 0
         this.usuario = usuario;
-        
     }
-    
-// Getters y Setters
-// Los getters y setters sirven para leer y modificar valores de los atributos privados.
-// get devuelve valores (return), set los cambia (void).
+
+    // Getters y Setters
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
@@ -38,18 +32,6 @@ public class Cuenta {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public String getTipoCuenta() {
-        return tipoCuenta;
-    }
-
-    public void setTipoCuenta(String tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -57,32 +39,35 @@ public class Cuenta {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    //Creación de metodos (Funciones) Retiro y Deposito
-    
-    // Metodo Deposito
-    public void Deposito(double monto){
-    
-        if(monto > 0 ){
+
+    /**
+     * Método para depositar dinero en la cuenta.
+     * @param monto Cantidad a depositar (debe ser mayor a 0).
+     */
+    public void Deposito(double monto) {
+        if (monto > 0) {
             this.saldo += monto;
+            System.out.println("Depósito exitoso: Q" + monto);
         } else {
-            System.out.println("Denegado su deposito tiene que ser mayor a 0.");
-        }       
-    }
-    
-    public void Retiro(double monto){
-        if(saldo >= saldo && monto > 0) {
-            this.saldo -=monto; 
-        } else{
-            System.out.println("Retiro no válido. Verifique el monto o saldo insuficiente.");
+            System.out.println("Error: El depósito debe ser mayor a 0.");
         }
     }
-    // Es una anotacion que le dicce al compilador que estamos sobrescribiendo un metodo de la clase base.
+
+    /**
+     * Método para retirar dinero de la cuenta.
+     * @param monto Cantidad a retirar.
+     */
+    public void Retiro(double monto) {
+        if (monto > 0 && saldo >= monto) {
+            this.saldo -= monto;
+            System.out.println("Retiro exitoso: Q" + monto);
+        } else {
+            System.out.println("Error: Saldo insuficiente o monto inválido.");
+        }
+    }
+
     @Override
-    
-    //Metodo(toString) Se usa para devolver una representación en forma de cadena (String) de un objeto. 
     public String toString() {
-        // Cuenta [Número: 123456, Tipo: Ahorro, Saldo: 0.0]
-        return "Cuenta [Número: " + numeroCuenta + ", Tipo: " + tipoCuenta + ", Saldo: " + saldo + "]";
+        return "Cuenta [Número: " + numeroCuenta + ", Saldo: Q" + saldo + "]";
     }
 }

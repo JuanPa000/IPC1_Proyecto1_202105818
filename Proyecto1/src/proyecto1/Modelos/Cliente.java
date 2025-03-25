@@ -4,19 +4,34 @@
  */
 package proyecto1.Modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
     private String cui;
     private String nombre;
     private String apellido;
+    private List<Cuenta> cuentas; // Lista de cuentas asociadas al cliente
+
 
     // Constructor
     public Cliente(String cui, String nombre, String apellido) {
         this.cui = cui;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.cuentas = new ArrayList<>(); // Inicializa la lista
     }
 
     // Getters y Setters
+    
+    public List<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void agregarCuenta(Cuenta cuenta) {
+        cuentas.add(cuenta);
+    }
+    
     public String getCui() {
         return cui;
     }

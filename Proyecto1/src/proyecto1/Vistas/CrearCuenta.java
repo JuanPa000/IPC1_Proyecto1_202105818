@@ -4,38 +4,55 @@
  */
 package proyecto1.Vistas;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import proyecto1.Modelos.Cliente;
 import proyecto1.Modelos.Cuenta;
-import proyecto1.Modelos.Usuario;
 
 /**
  *
  * @author ppabl
  */
 public class CrearCuenta extends javax.swing.JFrame {
+    private List<Cliente> listaClientes;
+    private List<Cuenta> listaCuentas;
 
     /**
      * Creates new form CrearCuenta
      */
-    public CrearCuenta() {
+    public CrearCuenta(List<Cliente> clientes, List<Cuenta> cuentas) {
         super("Crear Cuenta");
         initComponents();
         
+        // Inicializar listas
+        this.listaClientes = (clientes != null) ? clientes : new ArrayList<>();
+        this.listaCuentas = (cuentas != null) ? cuentas : new ArrayList<>();
+        
+        cargarClientes();
     }
-
-    CrearCuenta(List<Usuario> listaUsuarios, List<Cuenta> listaCuentas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-   
+    
     private void cargarClientes() {
-        // Aquí debo agregar la lógica para cargar los clientes del sistema
-        // Este es solo un ejemplo con clientes dummy
-        comboClientes.addItem("CUI: 12345 - Juan Pérez");
-        comboClientes.addItem("CUI: 67890 - María Gómez");
+        comboClientes.removeAllItems(); 
+
+        if (listaClientes.isEmpty()) {
+            comboClientes.addItem("No hay clientes registrados");
+            return;
+        }
+        for (Cliente cliente : listaClientes) {
+            String item = "CUI: " + cliente.getCui() + " - " + cliente.getNombre() + " " + cliente.getApellido();
+            comboClientes.addItem(item);
+        }
     }
 
+    private Cliente obtenerClientePorCUI(String cui) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCui().equals(cui)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,28 +63,17 @@ public class CrearCuenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         comboClientes = new javax.swing.JComboBox<>();
         btnCrearCuenta = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Haettenschweiler", 2, 14)); // NOI18N
-        jLabel1.setText("CLIENTE");
+        jLabel1.setText("Cliente");
 
-        comboClientes.setFont(new java.awt.Font("Haettenschweiler", 2, 14)); // NOI18N
         comboClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboClientesActionPerformed(evt);
-            }
-        });
 
-        btnCrearCuenta.setFont(new java.awt.Font("Haettenschweiler", 2, 14)); // NOI18N
-        btnCrearCuenta.setText("CREAR");
+        btnCrearCuenta.setText("jButton1");
         btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCuentaActionPerformed(evt);
@@ -81,81 +87,67 @@ public class CrearCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
+                        .addGap(150, 150, 150)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(183, Short.MAX_VALUE))
+                            .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addComponent(btnCrearCuenta)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboClientesActionPerformed
-
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
-                                             
-        // Obtener el cliente seleccionado
-        String clienteSeleccionado = (String) comboClientes.getSelectedItem();
+        String seleccion = (String) comboClientes.getSelectedItem();
 
-        // Verificar si se seleccionó un cliente
-        if (clienteSeleccionado == null || clienteSeleccionado.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona un cliente.");
+        if (seleccion == null || seleccion.equals("No hay clientes registrados")) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un cliente válido.");
             return;
         }
 
-        // Buscar el cliente correspondiente (esto puede variar dependiendo de cómo guardas los clientes)
-        Cliente cliente = obtenerCliente(clienteSeleccionado);  // Implementa esta función para buscar al cliente por su nombre o CUI
+        try {
+            String[] partes = seleccion.split(": ");
+            if (partes.length < 2) {
+                throw new Exception("Formato incorrecto en selección.");
+            }
 
-        // Verificar si el cliente existe
-        if (cliente == null) {
-            JOptionPane.showMessageDialog(this, "Cliente no encontrado.");
-            return;
+            String cuiSeleccionado = partes[1].split(" - ")[0]; // Extraer solo el CUI
+            Cliente cliente = obtenerClientePorCUI(cuiSeleccionado);
+
+            if (cliente == null) {
+                JOptionPane.showMessageDialog(this, "Error: Cliente no encontrado.");
+                return;
+            }
+
+            if (cliente.getCuentas().size() >= 4) {
+                JOptionPane.showMessageDialog(this, "Este cliente ya tiene el límite de cuentas.");
+                return;
+            }
+
+            // Generar un número de cuenta único
+                String numeroCuenta = generarNumeroCuenta();
+                // Agregar la cuenta al cliente
+                cliente.agregarCuenta(nuevaCuenta);
+                listaCuentas.add(nuevaCuenta);
+
+            JOptionPane.showMessageDialog(this, "Cuenta creada exitosamente con saldo inicial de Q0.00.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar la selección.");
         }
-
-        // Verificar que el cliente no haya alcanzado el límite de cuentas
-        if (cliente.getCuentas().size() >= 4) { 
-            JOptionPane.showMessageDialog(this, "Este cliente ya tiene el límite de cuentas.");
-            return;
-        }
-
-        // Obtener el tipo de cuenta seleccionado
-        String tipoCuenta = (String) comboTipoCuenta.getSelectedItem();
-
-        // Asegurarnos que se ha seleccionado un tipo de cuenta
-        if (tipoCuenta == null || tipoCuenta.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona un tipo de cuenta.");
-            return;
-        }
-
-        // Crear la nueva cuenta con saldo inicial 0
-        Cuenta nuevaCuenta = new Cuenta(cliente, 0, tipoCuenta);
-
-        // Añadir la cuenta al cliente
-        cliente.agregarCuenta(nuevaCuenta);
-
-        // Mostrar mensaje de éxito
-        JOptionPane.showMessageDialog(this, "Cuenta creada exitosamente con saldo inicial de Q0.00.");
-
-        // Limpiar campos
-        comboClientes.setSelectedIndex(-1);
-        comboTipoCuenta.setSelectedIndex(-1);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     /**
@@ -188,7 +180,7 @@ public class CrearCuenta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearCuenta().setVisible(true);
+                new CrearCuenta(new ArrayList<>(), new ArrayList<>()).setVisible(true);
             }
         });
     }
@@ -196,7 +188,6 @@ public class CrearCuenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCuenta;
     private javax.swing.JComboBox<String> comboClientes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

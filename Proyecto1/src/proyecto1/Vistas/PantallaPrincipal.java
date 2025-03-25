@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyecto1.Vistas;
+import proyecto1.CrearCuenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import proyecto1.Modelos.Usuario;
